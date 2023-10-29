@@ -76,8 +76,19 @@ class BookServiceTest @Autowired constructor(
         val bookName = "이상한 나라의 앨리스"
         val alreadyLoanUser = "최태현"
         bookRepository.save(Book(bookName))
-        val savedUser = userRepository.save(User(alreadyLoanUser, null))
-        userLoanHistoryRepository.save(UserLoanHistory(savedUser, bookName, false))
+        val savedUser = userRepository.save(
+            User(
+                alreadyLoanUser,
+                null
+            )
+        )
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                savedUser,
+                bookName,
+                false
+            )
+        )
 
         val request = BookLoanRequest(alreadyLoanUser, bookName)
 
@@ -96,8 +107,19 @@ class BookServiceTest @Autowired constructor(
         val bookName = "이상한 나라의 앨리스"
         val alreadyLoanUser = "최태현"
         bookRepository.save(Book(bookName))
-        val savedUser = userRepository.save(User(alreadyLoanUser, null))
-        userLoanHistoryRepository.save(UserLoanHistory(savedUser, bookName, false))
+        val savedUser = userRepository.save(
+            User(
+                alreadyLoanUser,
+                null
+            )
+        )
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                savedUser,
+                bookName,
+                false
+            )
+        )
 
         val request = BookReturnRequest(alreadyLoanUser, bookName)
 

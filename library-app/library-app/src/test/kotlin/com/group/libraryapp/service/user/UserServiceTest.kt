@@ -5,10 +5,8 @@ import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.groups.Tuple
 import org.assertj.core.groups.Tuple.*
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -61,7 +59,7 @@ class UserServiceTest @Autowired constructor (
         //given
         val savedUser = userRepository.save(User("A", null))
 
-        val request = UserUpdateRequest(savedUser.id, "B")
+        val request = UserUpdateRequest(savedUser.id!!, "B")
 
         //when
         userService.updateUserName(request)
