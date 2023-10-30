@@ -35,7 +35,8 @@ class BookServiceTest @Autowired constructor(
     fun saveBookTest() {
         //given
         val name = "이상한 나라의 앨리스"
-        val request = BookRequest(name)
+        val type = "COMPUTER"
+        val request = BookRequest(name, type)
 
         //when
         bookService.saveBook(request)
@@ -43,8 +44,8 @@ class BookServiceTest @Autowired constructor(
         //then
         val books = bookRepository.findAll()
         assertThat(books).hasSize(1)
-            .extracting("name")
-            .containsExactlyInAnyOrder(name)
+            .extracting("name", "type")
+            .containsExactlyInAnyOrder(tuple(name, type))
     }
 
     @Test
@@ -52,7 +53,7 @@ class BookServiceTest @Autowired constructor(
     fun loanBookTest() {
         //given
         val bookName = "이상한 나라의 앨리스"
-        bookRepository.save(Book(bookName))
+        bookRepository.save(Book.fixture(bookName))
 
         val userName = "최태현"
         userRepository.save(User(userName, null))
@@ -75,7 +76,7 @@ class BookServiceTest @Autowired constructor(
         //given
         val bookName = "이상한 나라의 앨리스"
         val alreadyLoanUser = "최태현"
-        bookRepository.save(Book(bookName))
+        bookRepository.save(Book.fixture(bookName))
         val savedUser = userRepository.save(
             User(
                 alreadyLoanUser,
@@ -106,7 +107,7 @@ class BookServiceTest @Autowired constructor(
         //given
         val bookName = "이상한 나라의 앨리스"
         val alreadyLoanUser = "최태현"
-        bookRepository.save(Book(bookName))
+        bookRepository.save(Book.fixture(bookName))
         val savedUser = userRepository.save(
             User(
                 alreadyLoanUser,
